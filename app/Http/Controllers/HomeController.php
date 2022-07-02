@@ -24,11 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $username = Auth::user()->firstName . ' ' . Auth::user()->lastName;
-        $avatar = Auth::user()->avatar_link;
-        return view('app.home', [
-            'username' => $username,
-            'avatar' => $avatar
-        ]);
+        return view('app.home');
     }
 }

@@ -43,15 +43,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function getOwnFiles()
+    public function files()
     {
-        return $this->hasMany('File', 'owner', 'id');
+        return $this->hasMany(File::class, 'user_id');
     }
-
-    public function getAllFiles() {
-        return $this->belongsToMany('File');
-    }
-
-
 
 }

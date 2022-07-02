@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFileUserTable extends Migration
+class CreateTranslatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateFileUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('file_user', function (Blueprint $table) {
-            $table->integer('user_id');
-            $table->integer('file_id');
+        Schema::create('translates', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('file_id')->constrained();
+            $table->date('translated_at');
+            $table->longText('text');
         });
     }
 
@@ -26,6 +28,6 @@ class CreateFileUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('file_user');
+        Schema::dropIfExists('translates');
     }
 }

@@ -9,15 +9,15 @@ class File extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'path', 'owner', 'translate_path'];
+    protected $fillable = ['user_id', 'name', 'path', 'size', 'translated'];
 
-    public function getOwner()
+    public function user()
     {
-        return $this->belongsTo('User');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function allUsers() {
-        return $this->belongsToMany('User');
+    public function translate() {
+        return $this->hasOne(Translate::class);
     }
 
 }

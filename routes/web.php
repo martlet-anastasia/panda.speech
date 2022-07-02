@@ -1,6 +1,6 @@
 <?php
 
-    use App\Http\Controllers\Dashboard\FileController;
+    use App\Http\Controllers\App\FileController;
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Route;
 
@@ -23,12 +23,15 @@
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+    Route::resources([
+        'file' => \App\Http\Controllers\FileController::class
+    ]);
 
     Route::match(['get', 'post'], '/test1', function () {
         return view('app.dashboard');
     })->name('billing');
 
-    Route::post('/file-uploading', [\App\Http\Controllers\Dashboard\FileUploadController::class, 'checkFileType'])->name('upload');
+    Route::post('/file-uploading', [\App\Http\Controllers\App\FileUploadController::class, 'checkFileType'])->name('upload');
 
 
 

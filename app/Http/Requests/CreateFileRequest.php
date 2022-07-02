@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class UploadFileRequest extends FormRequest
+class CreateFileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,15 +25,16 @@ class UploadFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'filenames.*' => 'required|mimes:audio',
+            'audiofiles.*' => 'required|mimetypes:audio/mpeg|max:2048',
         ];
     }
 
     public function messages()
     {
         return [
-            'filenames.*.required' => 'File name is required',
-            'filenames.*.mimes' => 'Only :attribute  audio files are supported',
+            'audiofiles.*.required' => 'File name is required',
+            'audiofiles.*.mimetypes' => 'Only audio files are supported',
+            'audiofiles.*.max' => 'Maximum file size is 2 Mb',
         ];
     }
 }

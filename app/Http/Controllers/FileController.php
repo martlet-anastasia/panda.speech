@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateFileRequest;
+use App\Models\File;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
@@ -14,7 +16,7 @@ class FileController extends Controller
      */
     public function index()
     {
-        return view('dashboard.dashboard');
+        return view('file.index');
     }
 
     /**
@@ -24,7 +26,7 @@ class FileController extends Controller
      */
     public function create()
     {
-        return view('dashboard.file_upload_form');
+        return view('file.create');
     }
 
     /**
@@ -33,9 +35,32 @@ class FileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateFileRequest $request)
     {
-        //
+        $userId = auth()->id();
+        $existFiles = User::findOrFail($userId)->files;
+        $existFilesName = [];
+        foreach($existFiles as $existFile) {
+            $existFilesName[] = $existFile->name;
+        }
+
+        $errors = [];
+        foreach ($request->audiofiles as $file) {
+            $originalFileName = $file->getClientOriginalName();
+            if(in_array($file->getClientOriginalName(), $existFilesName)) {
+                $errors[] = 'File ' . $originalFileName . ' already exists';
+            } else {
+                $data = [
+                    'user_id' => $userId,
+                    'name' => $originalFileName,
+                    'path' => $file->store('public/' . $userId . '/files'),
+                    'size' => $file->getSize(),
+                ];
+                File::create($data);
+            }
+        }
+        return back()->withErrors($errors);
+
     }
 
     /**
@@ -44,9 +69,13 @@ class FileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(File $file)
     {
-        //
+        $translate = $file->translate;
+        return view('file.show', [
+            'file' => $file,
+            'translate' => $translate
+        ]);
     }
 
     /**
