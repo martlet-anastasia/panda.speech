@@ -15,9 +15,9 @@ class FileFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->text(10).'.mp4',
+            'name' => $this->faker->unique()->text(10)'.mp4',
             'path' => $this->faker->randomElement(Storage::files('/public/tmp/audio')),
-            'size' => $this->faker->randomFloat(2, 0.1, 10),
+            'size' => $this->faker->randomFloat(2, 700, 2000),
             'translated' => $this->faker->randomElement([0, 1, null]),
             'created_at' => $this->faker->dateTime(),
             'updated_at' => $this->faker->dateTime(),

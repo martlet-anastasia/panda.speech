@@ -72,7 +72,7 @@
                                     <p>Average score = {{ $score }}</p>
                                 </div>
                                 <div>
-                                    <a href="{{ route('download.translate', ['file_id' => $file_id]) }}"
+                                    <a href="{{ route('translate.download', $file_id) }}"
                                        data-toggle="tooltip" data-placement="top" title=""
                                        data-original-title="Download translate">
                                         <i class="fa fa-lg fa-save text-dark"></i>

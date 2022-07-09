@@ -52,21 +52,21 @@
                                     <div class="d-flex justify-content-around">
                                         <div>
                                             <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Rename">
-                                                <i class="fa fa-pencil m-r-5 text-secondary"></i>
+                                                <i class="fa fa-pencil m-r-5 mt-1 text-secondary"></i>
                                             </a>
                                         </div>
 
                                         <div>
                                             <a href="{{ route('file.translate', ['id' => $file->id]) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Translate">
-                                                <i class="fa fa-history text-secondary"></i>
+                                                <i class="fa fa-history text-secondary mt-1"></i>
                                             </a>
                                         </div>
 
-                                        <div>
+                                        <div class="align-top">
                                             <form action="{{ route('file.destroy', compact('file')) }}" method="POST" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="fa fa-close bg-transparent border-0 text-secondary c-pointer"></button>
+                                                <button type="submit" class="btn p-0 shadow-none c-pointer fa fa-close bg-transparent border-0 text-secondary"></button>
                                             </form>
                                         </div>
                                     </div>

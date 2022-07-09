@@ -39,8 +39,8 @@
     Route::get('file/{id}/show-translate', [\App\Http\Controllers\TranslateController::class, 'showTranslate'])
         ->name('translate.show');
 
-   Route::get('download/translate', [\App\Http\Controllers\DownloadController::class, 'downloadTranslate'])
-       ->name('download.translate');
+   Route::get('translate/download/{id}', [\App\Http\Controllers\DownloadController::class, 'downloadTranslate'])
+       ->name('translate.download');
 
 
     Route::get('profile', function () {
