@@ -16,7 +16,7 @@ class CreateTranslatesTable extends Migration
         Schema::create('translates', function (Blueprint $table) {
             $table->id();
             $table->foreignId('file_id')->constrained();
-            $table->date('translated_at');
+            $table->timestamps();
             $table->longText('text');
         });
     }

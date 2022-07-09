@@ -23,16 +23,31 @@
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::resources([
-        'file' => \App\Http\Controllers\FileController::class
-    ]);
+    Route::get('file/{id}/translate', [\App\Http\Controllers\TranslateController::class, 'configureTranslate'])
+        ->name('file.translate');
 
-    Route::match(['get', 'post'], '/test1', function () {
-        return view('app.dashboard');
-    })->name('billing');
+    Route::resource('file', \App\Http\Controllers\FileController::class)
+        ->except(['show']);
 
-    Route::post('/file-uploading', [\App\Http\Controllers\App\FileUploadController::class, 'checkFileType'])->name('upload');
+    Route::post('transcription', [\App\Http\Controllers\TranslateController::class, 'runTranslate'])
+        ->name('transcription');
+
+   Route::resource('translate', \App\Http\Controllers\TranslateController::class);
+
+
+    Route::get('profile', function () {
+        return "<h1>Protfile</h1>>";
+    })->name('profile');
+
+    Route::get('tariff', function () {
+        return "<h1>Tariff</h1>>";
+    })->name('tariff');
+//    Route::match(['get', 'post'], '/test1', function () {
+//        return view('app.dashboard');
+//    })->name('billing');
+
+//    Route::post('/file-uploading', [\App\Http\Controllers\App\FileUploadController::class, 'checkFileType'])->name('upload');
 
 
 
-    Route::resource('/files', FileController::class);
+    Route::any('/test', [\App\Http\Controllers\TranslateController::class, 'index'])->name('test');
