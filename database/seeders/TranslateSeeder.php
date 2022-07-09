@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class TranslateSeeder extends Seeder
@@ -24,8 +25,9 @@ class TranslateSeeder extends Seeder
             DB::table('translates')->insert(
                 [
                     'file_id' => $file->id,
-                    'translated_at' => '2022-07-04 17:55:57',
-                    'text' => Factory::create()->realTextBetween(50, 1000),
+                    'path' => Factory::create()->randomElement(Storage::files('/public/tmp/translate')),
+                    'created_at' => Factory::create()->dateTime(),
+                    'updated_at' => Factory::create()->dateTime(),
                 ]);
         }
 

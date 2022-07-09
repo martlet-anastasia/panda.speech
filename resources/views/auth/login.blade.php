@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6 text-center mb-4 mt-4">
+            <div class="col-md-6 text-center mb-2 mt-2">
                 <h2 class="heading-section">Welcome to Panda Speech!</h2>
             </div>
         </div>

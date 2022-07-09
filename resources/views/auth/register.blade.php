@@ -9,7 +9,7 @@
                     <div class="img"
                          style="background-image: url({{asset('/auth/images/green_leaves.jpg')}});">
                     </div>
-                    <div class="login-wrap p-4 p-md-5">
+                    <div class="login-wrap p-1 my-3 mx-5">
                         <div class="d-flex">
                             <div class="w-100">
                                 <h3 class="mb-4">{{ __('Register') }}</h3>
@@ -28,7 +28,7 @@
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
 
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-2">
                                 <label class="label" for="firstName">{{ __('First Name') }}</label>
                                 <input id="firstName" type="text" class="form-control @error('firstName') is-invalid @enderror" name="firstName" value="{{ old('firstName') }}" required autocomplete="firstName" autofocus>
 
@@ -39,7 +39,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-2">
                                 <label class="label" for="lastName">{{ __('Last Name') }}</label>
                                 <input id="lastName" type="text" class="form-control @error('lastName') is-invalid @enderror" name="lastName" value="{{ old('lastName') }}" required autocomplete="lastName" autofocus>
 
@@ -50,7 +50,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-2">
                                 <label class="label" for="email">{{ __('Email Address') }}</label>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
@@ -61,7 +61,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-2">
                                 <label class="label" for="password">{{ __('Password') }}</label>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
@@ -72,7 +72,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-2">
                                 <label class="label" for="password-confirm">{{ __('Confirm Password') }}</label>
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>

@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <div class="col-lg-12 container-fluid">
         <div class="card">
             <div class="card-body">
@@ -38,7 +39,7 @@
                                 <td>{{ $file->name }}</td>
                                 <td>
                                         @if($file->translated)
-                                            <a href="{{ route('translate.show', ['file' => $file]) }}" class="badge badge-success">Translated</a>
+                                            <a href="{{ route('translate.show', ['id' => $file->id]) }}" class="badge badge-success">Translated</a>
                                         @elseif(is_null($file->translated))
                                             <span class="badge badge-warning">In progress</span>
                                         @else

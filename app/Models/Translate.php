@@ -9,7 +9,7 @@ class Translate extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['file_id', 'text'];
+    protected $fillable = ['file_id', 'path'];
 
     public function file() {
         $this->belongsTo(File::class, 'file_id');

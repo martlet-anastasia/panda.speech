@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::factory()
-            ->count(10)
+            ->count(2)
             ->hasFiles(100)
             ->create();
     }

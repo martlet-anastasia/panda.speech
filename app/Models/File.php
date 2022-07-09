@@ -17,7 +17,7 @@ class File extends Model
     }
 
     public function translate() {
-        return $this->hasOne(Translate::class);
+        return $this->hasOne(Translate::class)->latest();
     }
 
 }

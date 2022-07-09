@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 
 class FileFactory extends Factory
 {
@@ -14,8 +15,8 @@ class FileFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->text(10).'.mp4',
-            'path' => $this->faker->filePath(),
+            'name' => $this->faker->unique()->text(10).'.mp4',
+            'path' => $this->faker->randomElement(Storage::files('/public/tmp/audio')),
             'size' => $this->faker->randomFloat(2, 0.1, 10),
             'translated' => $this->faker->randomElement([0, 1, null]),
             'created_at' => $this->faker->dateTime(),

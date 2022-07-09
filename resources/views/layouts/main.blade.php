@@ -138,12 +138,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('translate.index') }}" aria-expanded="false">
+                        <a href="{{ route('home') }}" aria-expanded="false">
                             <i class="fa fa-quora"></i><span class="nav-text">Translate Jobs</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('translate.index') }}" aria-expanded="false">
+                        <a href="{{ route('home') }}" aria-expanded="false">
                             <i class="fa fa-leaf"></i><span class="nav-text">Translate Library</span>
                         </a>
                     </li>

@@ -1,33 +1,34 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+    use Illuminate\Database\Migrations\Migration;
+    use Illuminate\Database\Schema\Blueprint;
+    use Illuminate\Support\Facades\Schema;
 
-class CreateTranslatesTable extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    class CreateTranslatesTable extends Migration
     {
-        Schema::create('translates', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('file_id')->constrained();
-            $table->timestamps();
-            $table->longText('text');
-        });
-    }
+        /**
+         * Run the migrations.
+         *
+         * @return void
+         */
+        public function up()
+        {
+            Schema::create('translates', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('file_id')->constrained();
+                $table->string('path');
+                $table->timestamps();
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('translates');
+            });
+        }
+
+        /**
+         * Reverse the migrations.
+         *
+         * @return void
+         */
+        public function down()
+        {
+            Schema::dropIfExists('translates');
+        }
     }
-}

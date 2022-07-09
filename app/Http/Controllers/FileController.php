@@ -72,21 +72,6 @@ class FileController extends Controller
 
 //    TO DO chage show method to EDIT
 // Show will go from trangate cotlorrer!!!
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(File $file)
-    {
-        $translate = File::findOrFail($file->id)->translate;
-        return view('file.show', [
-            'file' => $file,
-            'translate' => $translate
-        ]);
-    }
-
 
     /**
      * Update the specified resource in storage.

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 
 class TranslateFactory extends Factory
 {
@@ -14,8 +15,7 @@ class TranslateFactory extends Factory
     public function definition()
     {
         return [
-            'translated_at' => $this->faker->dateTime(),
-            'text' => $this->faker->text(1000),
+            'path' => $faker->randomElement(Storage::files('/public/tmp/translate')),
         ];
     }
 }

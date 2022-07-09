@@ -23,16 +23,20 @@
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::get('file/{id}/translate', [\App\Http\Controllers\TranslateController::class, 'configureTranslate'])
-        ->name('file.translate');
-
     Route::resource('file', \App\Http\Controllers\FileController::class)
         ->except(['show']);
+
+    Route::get('file/{id}/configure-translate', [\App\Http\Controllers\TranslateController::class, 'configureTranslate'])
+        ->name('file.translate');
 
     Route::post('transcription', [\App\Http\Controllers\TranslateController::class, 'runTranslate'])
         ->name('transcription');
 
-   Route::resource('translate', \App\Http\Controllers\TranslateController::class);
+    Route::get('file/{id}/show-translate', [\App\Http\Controllers\TranslateController::class, 'showTranslate'])
+        ->name('translate.show');
+
+   Route::get('download/translate', [\App\Http\Controllers\DownloadController::class, 'downloadTranslate'])
+       ->name('download.translate');
 
 
     Route::get('profile', function () {
