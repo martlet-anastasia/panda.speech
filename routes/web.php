@@ -18,8 +18,12 @@
     Route::get('/', function () {
         return redirect('/home');
     })->middleware('auth');
-
     Auth::routes(['verify' => true]);
+
+    /** Google Auth **/
+    Route::get('auth/google', [\App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle']);
+    Route::get('auth/google/callback', [\App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);
+
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

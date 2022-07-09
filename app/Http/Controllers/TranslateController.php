@@ -98,7 +98,7 @@ class TranslateController extends Controller
             'filename' =>  File::findOrFail($id)->name,
             'fileid' => $id,
             'translated_at' => $translate->updated_at,
-            'text' => file_get_contents(Storage::get($translate->path))
+            'text' => Storage::get($translate->path)
         ];
 
         return view('translate.show', [
