@@ -43,27 +43,39 @@
          * @param \Illuminate\Http\Request $request
          * @return \Illuminate\Http\Response
          */
-        public function store(CreateFileRequest $request)
+        public function store(Request $request)
         {
             $userId = auth()->id();
             $existFileNames = $this->getAllUserFileNames();
+            $audioFiles = $request->audiofiles;
+            if(!$audioFiles) {
+                return back();
+            }
 
-            $errors = [];
-            foreach ($request->audiofiles as $file) {
+            $checkedAudioFiles = $request->checked_files;
+            $messages = [];
+            foreach ($audioFiles as $file) {
                 $originalFileName = $file->getClientOriginalName();
-                if (in_array($file->getClientOriginalName(), $existFileNames)) {
-                    $errors[] = 'File ' . $originalFileName . ' already exists';
-                } else {
-                    $data = [
-                        'user_id' => $userId,
-                        'name' => $originalFileName,
-                        'path' => $file->store('public/' . $userId . '/files'),
-                        'size' => $file->getSize(),
-                    ];
-                    File::create($data);
+                if(in_array($originalFileName, $checkedAudioFiles)) {
+                    if (in_array($file->getClientOriginalName(), $existFileNames)) {
+                        $messages[] = [
+                            "false" => 'File ' . $originalFileName . ' already exists.'
+                        ];
+                    } else {
+                        $data = [
+                            'user_id' => $userId,
+                            'name' => $originalFileName,
+                            'path' => $file->store('public/' . $userId . '/files'),
+                            'size' => $file->getSize(),
+                        ];
+                        File::create($data);
+                        $messages[] = [
+                            "true" => 'File ' . $originalFileName . ' successfully uploaded.</p>'
+                        ];
+                    }
                 }
             }
-            return back()->withErrors($errors);
+            return back()->with('messages', $messages);
 
         }
 
