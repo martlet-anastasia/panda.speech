@@ -5,7 +5,7 @@
 
     <div class="col-lg-12 container-fluid">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body pb-2">
                 <div class="card-title d-flex justify-content-between align-content-center">
                     <div class="d-flex align-items-center">
                         <h4 class="mb-0 text-center">Table of audios</h4>
@@ -17,8 +17,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-hover">
+                <div class="table-responsive mb-0">
+                    <table class="table table-hover mb-1">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -31,7 +31,7 @@
                         </thead>
                         <tbody>
                         <?php
-                        $fileCount = 1;
+                        $fileCount = $files->firstItem();
                         ?>
                         @foreach($files as $file)
                             <tr>
@@ -76,9 +76,11 @@
                                 ?>
                             </tr>
                         @endforeach
-
                         </tbody>
                     </table>
+                    <div class="mt-4 d-flex justify-content-end">
+                        {{ $files->links('vendor.pagination.simple-bootstrap-4') }}
+                    </div>
                 </div>
             </div>
         </div>

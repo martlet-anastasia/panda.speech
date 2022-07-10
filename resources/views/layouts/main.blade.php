@@ -80,7 +80,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="{{ asset(Auth::user()->avatar_link) }}" height="40" width="40" alt="">
+                                <img src="{{ Storage::url( Auth::user()->avatar_link )  }}" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile   dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -180,18 +180,6 @@
             Content body end
         ***********************************-->
 
-
-        <!--**********************************
-            Footer start
-        ***********************************-->
-        <div class="footer">
-            <div class="copyright">
-                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
-        </div>
-        <!--**********************************
-            Footer end
-        ***********************************-->
     </div>
     <!--**********************************
         Main wrapper end

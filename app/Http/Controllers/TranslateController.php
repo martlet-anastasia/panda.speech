@@ -24,8 +24,11 @@ class TranslateController extends Controller
 
     protected function runTranslate(Request $request) {
 
+        $file_id = $request->id;
+
         /** Path to the file name */
-        $audioFile = \Illuminate\Support\Facades\Storage::path('public/extra_0a.wav');
+        $audioFile = Storage::path(File::findOrFail($file_id)->path);
+
         /** Get contents of a file into a string */
         $content = file_get_contents($audioFile);
 
@@ -61,21 +64,21 @@ class TranslateController extends Controller
             $average_score = round(array_sum($score) / count($score), 2);
 
             /** Save transcript */
-            $pathToSave = '/public/' . auth()->id() . '/translates/audio_' . $request->id . time();
+            $pathToSave = '/public/' . auth()->id() . '/translates/audio_' . $file_id . time();
             Storage::put($pathToSave, $transcript);
             $data = [
-                'file_id' => $request->id,
+                'file_id' => $file_id,
                 'path' => $pathToSave,
             ];
             Translate::create($data);
-            $file = File::findOrFail($request->id);
+            $file = File::findOrFail($file_id);
             $file->translated = 1;
             $file->save();
 
             return redirect()->back()
                 ->with('status', 'success')
                 ->with('average_score', $average_score)
-                ->with('file_id', $request->id)
+                ->with('file_id', $file_id)
                 ->with('message', $transcript);
 
         } catch (\Google\ApiCore\ApiException $exception) {
