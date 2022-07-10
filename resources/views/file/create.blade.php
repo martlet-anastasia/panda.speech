@@ -32,13 +32,19 @@
 
                 @if($messages)
                     @foreach ($messages as $message)
-                        @if(array_key_first($message))
+                        @if(array_key_first($message) === "true")
                             <div>
-                                <i class="fa fa-sun-o">{{head($message)}}</i>
+                                <i class="fa fa fa-check-circle text-success"></i>
+                                <span class="pl-3 text-dark">{{ head($message) }}</span>
+                                <a href="{{ route('file.translate', ['id' => $message["file_id"]]) }}"
+                                   data-toggle="tooltip" data-placement="top" title="" data-original-title="Translate">
+                                    <i class="fa fa-history text-secondary"></i>
+                                </a>
                             </div>
                         @else
                             <div>
-                                <i class="fa fa-newspaper-o">{{head($message)}}</i>
+                                <i class="fa fa fa-check-circle text-danger"></i>
+                                <span class="pl-3 text-dark">{{ head($message) }}</span>
                             </div>
                         @endif
                     @endforeach

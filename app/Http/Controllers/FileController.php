@@ -68,9 +68,10 @@
                             'path' => $file->store('public/' . $userId . '/files'),
                             'size' => $file->getSize(),
                         ];
-                        File::create($data);
+                        $newFile = File::create($data);
                         $messages[] = [
-                            "true" => 'File ' . $originalFileName . ' successfully uploaded.</p>'
+                            "true" => 'File ' . $originalFileName . ' successfully uploaded.',
+                            "file_id" => $newFile->id,
                         ];
                     }
                 }
