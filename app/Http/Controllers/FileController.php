@@ -43,7 +43,7 @@
          * @param \Illuminate\Http\Request $request
          * @return \Illuminate\Http\Response
          */
-        public function store(Request $request)
+        public function store(CreateFileRequest $request)
         {
             $userId = auth()->id();
             $existFileNames = $this->getAllUserFileNames();
@@ -93,18 +93,23 @@
         public function update(CreateFileRequest $request, File $file)
         {
             $newName = $request->newName;
-            $existFileNames = $this->getAllUserFileNames();
-            if (in_array($newName, $existFileNames)) {
-                $message = 'Name ' . $newName . ' already exists';
-            } else {
-                $file->fill([
-                    'name' => $newName,
-                ]);
-                $file->save();
-                $message = 'File successfully renamed';
-            }
+            if($newName) {
+                $extension = pathinfo($file->name, PATHINFO_EXTENSION);
+                $newName = str_contains($newName, $extension) ? $newName : $newName . '.' . $extension;
+                $existFileNames = $this->getAllUserFileNames();
+                if (in_array($newName, $existFileNames)) {
+                    $message = 'Name ' . $newName . ' already exists';
+                } else {
+                    $file->fill([
+                        'name' => $newName,
+                    ]);
+                    $file->save();
+                    $message = 'File successfully renamed';
+                }
 
-            return redirect()->route('file.index')->with($message);
+                return redirect()->route('file.index')->with('message', $message);
+            }
+            return back();
         }
 
         /**

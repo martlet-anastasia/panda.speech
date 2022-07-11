@@ -2,6 +2,27 @@
 
 @section('content')
 
+    <?php
+    $message = \Illuminate\Support\Facades\Session::get('message') ?? null;
+    ?>
+
+    @isset($message)
+        @if(str_contains($message, 'exists'))
+            <div class="alert alert-warning alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">×</span>
+                </button>
+                <strong>Holy guacamole!</strong> {{ $message }}
+            </div>
+        @else
+            <div class="alert alert-success alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">×</span>
+                </button>
+                <strong>What a wonderful day!</strong> {{ $message }}
+            </div>
+        @endif
+    @endisset
 
     <div class="col-lg-12 container-fluid">
         <div class="card">
@@ -11,7 +32,8 @@
                         <h4 class="mb-0 text-center">Table of audios</h4>
                     </div>
                     <div>
-                        <a href="{{ route('file.create') }}" class="btn text-dark btn-rounded btn-success d-inline-flex">
+                        <a href="{{ route('file.create') }}"
+                           class="btn text-dark btn-rounded btn-success d-inline-flex">
                             <span class="btn-icon-left"><i class="fa fa-upload color-success"></i></span>
                             Upload
                         </a>
@@ -34,45 +56,57 @@
                         $fileCount = $files->firstItem();
                         ?>
                         @foreach($files as $file)
-                            <tr>
+                            <tr name="changeDiv">
                                 <th>{{ $fileCount }}</th>
-                                <td>{{ $file->name }}</td>
+                                <form action="{{ route('file.update', compact('file')) }}" method="POST"
+                                      data-toggle="tooltip" data-placement="top" title=""
+                                      data-original-title="Rename">
+                                    @csrf
+                                    @method('PUT')
+                                    <td>
+                                        <input type="text" name="newName" placeholder="{{ $file->name }}"></inpit>
+                                        <button type="submit"
+                                                data-toggle="tooltip" data-placement="top" title=""
+                                                data-original-title="Save"
+                                                class="btn p-0 ml-1 shadow-none c-pointer fa fa-check bg-transparent border-0 text-secondary"></button>
+                                    </td>
+                                </form>
                                 <td>
-                                        @if($file->translated)
-                                            <a href="{{ route('translate.show', ['id' => $file->id]) }}" class="badge badge-success">Translated</a>
-                                        @elseif(is_null($file->translated))
-                                            <span class="badge badge-warning">In progress</span>
-                                        @else
-                                            <span class="badge badge-light">Empty</span>
-                                        @endif
+                                    @if($file->translated)
+                                        <a href="{{ route('translate.show', ['id' => $file->id]) }}"
+                                           class="badge badge-success">Translated</a>
+                                    @elseif(is_null($file->translated))
+                                        <span class="badge badge-warning">In progress</span>
+                                    @else
+                                        <span class="badge badge-light">Empty</span>
+                                    @endif
                                 </td>
                                 <td>{{ $file->updated_at }}</td>
                                 <td class="color-primary">Mb {{ number_format($file->size / 1048576, 1) }}</td>
                                 <td>
-                                    <div class="d-flex justify-content-around">
-                                        <div>
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Rename">
-                                                <i class="fa fa-pencil m-r-5 mt-1 text-secondary"></i>
-                                            </a>
-                                        </div>
-
-                                        <div>
-                                            <a href="{{ route('file.translate', ['id' => $file->id]) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Translate">
+                                    <div class="d-flex justify-content-start">
+                                        <div class="ml-2">
+                                            <a href="{{ route('file.translate', ['id' => $file->id]) }}"
+                                               data-toggle="tooltip" data-placement="top" title=""
+                                               data-original-title="Translate">
                                                 <i class="fa fa-history text-secondary mt-1"></i>
                                             </a>
                                         </div>
 
-                                        <div class="align-top">
-                                            <form action="{{ route('file.destroy', compact('file')) }}" method="POST" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
+                                        <div class="align-top ml-2">
+                                            <form action="{{ route('file.destroy', compact('file')) }}" method="POST"
+                                                  data-toggle="tooltip" data-placement="top" title=""
+                                                  data-original-title="Delete">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn p-0 shadow-none c-pointer fa fa-close bg-transparent border-0 text-secondary"></button>
+                                                <button type="submit"
+                                                        class="btn p-0 shadow-none c-pointer fa fa-close bg-transparent border-0 text-secondary"></button>
                                             </form>
                                         </div>
                                     </div>
                                 </td>
                                 <?php
-                                $fileCount = $fileCount+1;
+                                $fileCount = $fileCount + 1;
                                 ?>
                             </tr>
                         @endforeach
@@ -87,5 +121,28 @@
         <!-- /# card -->
     </div>
 
+    <script>
+        const fileToRenameDiv = document.getElementsByTagName("tr");
+        document.getElementsByName('changeDiv').forEach(item => {
+            item.addEventListener('click', event => {
+                item.children[1] =
+                    console.log(item.children[1]);
+                console.log(event.target);
+            })
+        })
+
+
+        // console.log(fileToRenameDiv);
+        fileToRenameDiv.onclick = function (e) {
+            console.log('hi')
+            console.log($this.closest('tr'));
+            // const fileArray = [];
+            // Array.prototype.forEach.call(e.target.files, function (file) {
+            //     console.log(file.name)
+            //     let newElem = divTemplate(file.name);
+            //     document.getElementById('files_selected').insertAdjacentHTML("beforeend", newElem);
+            // });
+        }
+    </script>
 
 @endsection

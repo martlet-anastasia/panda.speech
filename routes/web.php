@@ -42,14 +42,22 @@
    Route::get('translate/download/{id}', [\App\Http\Controllers\DownloadController::class, 'downloadTranslate'])
        ->name('translate.download');
 
+    Route::get('translate/library', [\App\Http\Controllers\TranslateController::class, 'showTranslateAll'])
+        ->name('translate.library');
+
+    Route::get('translate.jobs', function () {
+        return view('translate.jobs');
+    })->name('translate.jobs');
 
     Route::get('profile', function () {
-        return "<h1>Protfile</h1>>";
+        return view('profile.index');
     })->name('profile');
 
     Route::get('tariff', function () {
-        return "<h1>Tariff</h1>>";
+        return view('tariff.index');
     })->name('tariff');
+
+
 //    Route::match(['get', 'post'], '/test1', function () {
 //        return view('app.dashboard');
 //    })->name('billing');

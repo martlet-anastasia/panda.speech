@@ -25,7 +25,7 @@ class CreateFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'audiofiles.*' => 'required|mimetypes:audio/mpeg|max:2048',
+            'audiofiles.*' => 'required|mime:mp3,mp4,wav,flac|max:5210',
         ];
     }
 
@@ -33,8 +33,8 @@ class CreateFileRequest extends FormRequest
     {
         return [
             'audiofiles.*.required' => 'File name is required',
-            'audiofiles.*.mimetypes' => 'Only audio files are supported',
-            'audiofiles.*.max' => 'Maximum file size is 2 Mb',
+            'audiofiles.*.mimetypes' => 'Only audio files of types mp3, mp4, wav and flac are supported',
+            'audiofiles.*.max' => 'Maximum file size is 5 Mb',
         ];
     }
 }

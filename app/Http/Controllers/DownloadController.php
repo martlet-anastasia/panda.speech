@@ -17,6 +17,17 @@ class DownloadController extends Controller
         return Storage::download($translate->path, $name);
     }
 
+    public function downloadTranslateAll(Request $request) {
+
+        $file = File::findOrFail($id);
+        $translate = $file->translate;
+        $name = pathinfo($file->name, PATHINFO_FILENAME);
+        $name = $name . '-text.txt';
+        return Storage::download($translate->path, $name);
+
+    }
+
+
 //    public function downloadAudio(Request $request, $id) {
 //
 //        $file = File::findOrFail($id);
