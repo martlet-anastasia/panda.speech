@@ -64,11 +64,12 @@
                                     @csrf
                                     @method('PUT')
                                     <td>
-                                        <input type="text" name="newName" placeholder="{{ $file->name }}"></inpit>
+                                        <input type="text" name="newName" placeholder="{{ $file->name }}"
+                                        class="border-0 bg-transparent"></inpit>
                                         <button type="submit"
                                                 data-toggle="tooltip" data-placement="top" title=""
                                                 data-original-title="Save"
-                                                class="btn p-0 ml-1 shadow-none c-pointer fa fa-check bg-transparent border-0 text-secondary"></button>
+                                                class="d-none btn p-0 ml-1 shadow-none c-pointer fa fa-check bg-transparent border-0 text-secondary"></button>
                                     </td>
                                 </form>
                                 <td>
@@ -122,27 +123,12 @@
     </div>
 
     <script>
-        const fileToRenameDiv = document.getElementsByTagName("tr");
-        document.getElementsByName('changeDiv').forEach(item => {
+        document.getElementsByName('newName').forEach(item => {
             item.addEventListener('click', event => {
-                item.children[1] =
-                    console.log(item.children[1]);
-                console.log(event.target);
+                event.target.classList.remove("bg-transparent")
+                event.target.nextElementSibling.classList.toggle('d-none');
             })
         })
-
-
-        // console.log(fileToRenameDiv);
-        fileToRenameDiv.onclick = function (e) {
-            console.log('hi')
-            console.log($this.closest('tr'));
-            // const fileArray = [];
-            // Array.prototype.forEach.call(e.target.files, function (file) {
-            //     console.log(file.name)
-            //     let newElem = divTemplate(file.name);
-            //     document.getElementById('files_selected').insertAdjacentHTML("beforeend", newElem);
-            // });
-        }
     </script>
 
 @endsection

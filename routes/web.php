@@ -56,14 +56,3 @@
     Route::get('tariff', function () {
         return view('tariff.index');
     })->name('tariff');
-
-
-//    Route::match(['get', 'post'], '/test1', function () {
-//        return view('app.dashboard');
-//    })->name('billing');
-
-//    Route::post('/file-uploading', [\App\Http\Controllers\App\FileUploadController::class, 'checkFileType'])->name('upload');
-
-
-
-    Route::any('/test', [\App\Http\Controllers\TranslateController::class, 'index'])->name('test');

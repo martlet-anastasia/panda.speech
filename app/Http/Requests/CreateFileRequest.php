@@ -25,7 +25,7 @@ class CreateFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'audiofiles.*' => 'required|mime:mp3,mp4,wav,flac|max:5210',
+            'audiofiles.*' => 'required|mimes:mp3,mp4,wav,flac|max:5210',
         ];
     }
 

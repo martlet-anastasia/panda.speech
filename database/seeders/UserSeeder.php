@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     {
         User::factory()
             ->count(2)
-            ->hasFiles(100)
+            ->hasFiles(14)
             ->create();
     }
 }

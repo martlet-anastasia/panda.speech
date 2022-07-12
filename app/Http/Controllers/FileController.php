@@ -45,6 +45,8 @@
          */
         public function store(CreateFileRequest $request)
         {
+
+            dd($request);
             $userId = auth()->id();
             $existFileNames = $this->getAllUserFileNames();
             $audioFiles = $request->audiofiles;
@@ -79,9 +81,6 @@
             return back()->with('messages', $messages);
 
         }
-
-//    TO DO chage show method to EDIT
-// Show will go from trangate cotlorrer!!!
 
         /**
          * Update the specified resource in storage.

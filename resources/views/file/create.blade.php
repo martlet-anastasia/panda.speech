@@ -6,6 +6,18 @@
     $messages = Session::get('messages') ?? null;
     ?>
 
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-warning alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">×</span>
+                </button>
+                <strong>Holy guacamole!</strong> {{ $error }}
+            </div>
+        @endforeach
+
+    @endif
+
     <div class="col-lg-12 container-fluid">
         <div class="card">
             <div class="card-body">
